@@ -9,7 +9,10 @@ You will find an LCL scraper to transform an account a bank statement into a dat
 
 Then put your LCL bank statement into `EconoMe\LCL`
 
+# Launch
+
+`python EconoMe`
+
 # Test
 
-- `cd Econome`
 - `pytest`

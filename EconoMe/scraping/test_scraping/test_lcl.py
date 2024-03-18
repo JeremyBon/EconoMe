@@ -7,7 +7,7 @@ import os
 load_dotenv()
 
 def test_lcl():
-    folder="LCL"
+    folder="EconoMe/LCL"
     LCL_balance=os.getenv("END_LCL")
     assert LCL_balance is not None
     df=convert_LCLpdf_to_df(folder)
