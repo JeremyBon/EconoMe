@@ -13,7 +13,7 @@ def test_lcl():
     df=convert_LCLpdf_to_df(folder)
     debit_total=np.round(df['DEBIT'].sum(),2)
     credit_total=np.round(df['CREDIT'].sum(),2)
-    balance=np.round(0-debit_total+credit_total-LCL_balance,2)
+    balance=np.round(0-debit_total+credit_total-float(LCL_balance),2)
     assert balance==0
    
     
