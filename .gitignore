@@ -2,3 +2,5 @@
 fi
 *.ipynb
 *.csv
+*.json
+*.env

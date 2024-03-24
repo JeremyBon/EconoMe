@@ -53,14 +53,22 @@ def convert_LCLpdf_to_df(pdf_path: str) -> pd.DataFrame:
         if len(dfs_final) > 0:
             dfs_final = pd.concat(dfs_final, ignore_index=True)
             all_df_clean.append(dfs_final)
-    assert len(all_df_clean) == len(raw_dfs)
+    try:
+        assert len(all_df_clean) == len(raw_dfs)
+    except:
+        print("Error in the number of dataframes")
+        print("before cleaning : ", len(raw_dfs))
+        print("after cleaning : ", len(all_df_clean))
+        raise
     all_transactions = []
     for index, df in tqdm(enumerate(all_df_clean)):
         df["DEBIT"] = df["DEBIT"].astype(float)
         df["CREDIT"] = df["CREDIT"].astype(float)
         transactions = df.iloc[1:-1]
         all_transactions.append(transactions)
-    return pd.concat(all_transactions, ignore_index=True)
+    df= pd.concat(all_transactions, ignore_index=True)
+    df['Date'] = pd.to_datetime(df['VALEUR'],dayfirst=True)
+    return df
 
 
 def clean_df(df: pd.DataFrame) -> pd.DataFrame:
@@ -118,7 +126,7 @@ def clean_df(df: pd.DataFrame) -> pd.DataFrame:
             df_final["CREDIT"]
         )
         df_final.fillna({"VALEUR": 0, "DEBIT": 0, "CREDIT": 0}, inplace=True)
-
+       
         return df_final[["Date", "Description", "VALEUR", "DEBIT", "CREDIT"]]
 
 
