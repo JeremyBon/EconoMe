@@ -66,8 +66,8 @@ def convert_LCLpdf_to_df(pdf_path: str) -> pd.DataFrame:
         df["CREDIT"] = df["CREDIT"].astype(float)
         transactions = df.iloc[1:-1]
         all_transactions.append(transactions)
-    df= pd.concat(all_transactions, ignore_index=True)
-    df['Date'] = pd.to_datetime(df['VALEUR'],dayfirst=True)
+    df = pd.concat(all_transactions, ignore_index=True)
+    df["Date"] = pd.to_datetime(df["VALEUR"], dayfirst=True)
     return df
 
 
@@ -126,7 +126,7 @@ def clean_df(df: pd.DataFrame) -> pd.DataFrame:
             df_final["CREDIT"]
         )
         df_final.fillna({"VALEUR": 0, "DEBIT": 0, "CREDIT": 0}, inplace=True)
-       
+
         return df_final[["Date", "Description", "VALEUR", "DEBIT", "CREDIT"]]
 
 
